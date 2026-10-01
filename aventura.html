@@ -1,0 +1,1129 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aventura | CineMundo</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080b0d;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* HEADER */
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(8, 11, 13, 0.96);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #d4af37;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover,
+        nav a.ativo {
+            color: #d4af37;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 100vh;
+            padding: 120px 10% 70px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, rgba(8, 11, 13, 0.98) 0%, rgba(8, 11, 13, 0.82) 45%, rgba(8, 11, 13, 0.25) 100%),
+                linear-gradient(0deg, #080b0d 0%, transparent 30%),
+                url('../images/aventura-banner.jpg') center/cover no-repeat;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .categoria {
+            color: #d4af37;
+            font-size: 15px;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(48px, 8vw, 100px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 650px;
+            color: #ddd;
+            margin-bottom: 35px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: #b00000;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .botao:hover {
+            background: #d4af37;
+            color: #080b0d;
+        }
+
+        /* SEÇÕES */
+
+        section {
+            padding: 90px 10%;
+        }
+
+        .titulo-secao {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+
+        .subtitulo {
+            color: #a7a7a7;
+            line-height: 1.8;
+            max-width: 850px;
+            margin-bottom: 45px;
+        }
+
+        /* HISTÓRIA */
+
+        .historia {
+            background: #0d1113;
+        }
+
+        .historia-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .historia img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #d4af37;
+        }
+
+        .historia-texto p {
+            color: #bdbdbd;
+            line-height: 1.9;
+            margin-bottom: 18px;
+        }
+
+        /* CARDS */
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .info-card {
+            background: #111719;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .numero {
+            color: #b00000;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .info-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .info-card p {
+            color: #a7a7a7;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* LINHA DO TEMPO */
+
+        .timeline {
+            background: #0d1113;
+        }
+
+        .linha {
+            border-left: 2px solid #b00000;
+            padding-left: 35px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -43px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #d4af37;
+            border-radius: 50%;
+        }
+
+        .timeline-item h3 {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item p {
+            color: #a7a7a7;
+            line-height: 1.8;
+        }
+
+        /* FILMES */
+
+        .filmes {
+            background: #080b0d;
+        }
+
+        .cards-filmes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .filme-card {
+            background: #111719;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+        }
+
+        .filme-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .filme-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .filme-info {
+            padding: 20px;
+        }
+
+        .filme-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .filme-info p {
+            color: #a7a7a7;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .nota {
+            color: #d4af37;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        /* DIRETORES */
+
+        .diretores {
+            background: #080b0d;
+        }
+
+        .diretor-card {
+            background: #111719;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .diretor-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .diretor-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+
+        .diretor-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 19px;
+            margin: 18px 10px 5px;
+        }
+
+        .diretor-card p {
+            color: #a7a7a7;
+            font-size: 13px;
+            padding: 0 15px 20px;
+        }
+
+        /* TRAILER */
+
+        .trailer {
+            background: #0d1113;
+            text-align: center;
+        }
+
+        .trailer iframe {
+            width: 80%;
+            height: 450px;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* CURIOSIDADES */
+
+        .curiosidades {
+            background: #080b0d;
+        }
+
+        /* FAQ */
+
+        .faq {
+            background: #0d1113;
+        }
+
+        .faq-item {
+            background: #111719;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin-bottom: 15px;
+        }
+
+        .faq-item h3 {
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .faq-item p {
+            color: #a7a7a7;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #050708;
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 60px 10%;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+
+        footer h3 {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            margin-bottom: 18px;
+        }
+
+        footer p,
+        footer a {
+            color: #888;
+            font-size: 13px;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #d4af37;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 1100px) {
+            .grid-4,
+            .cards-filmes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            nav {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 800px) {
+            header {
+                height: auto;
+                min-height: 80px;
+                flex-direction: column;
+                justify-content: center;
+                gap: 12px;
+                padding: 15px 5%;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 150px 7% 80px;
+            }
+
+            .historia-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trailer iframe {
+                width: 100%;
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            section {
+                padding: 70px 6%;
+            }
+
+            .grid-4,
+            .cards-filmes,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .titulo-secao {
+                font-size: 30px;
+            }
+
+            .filme-card img {
+                height: 400px;
+            }
+
+            .historia img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+        <div class="logo">Cine<span>Mundo</span></div>
+
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="açao.html">Ação</a>
+            <a href="comedia.html">Comédia</a>
+            <a href="romance.html">Romance</a>
+            <a href="terror.html">Terror</a>
+            <a href="ficçao.html">Ficção</a>
+            <a href="suspense.html">Suspense</a>
+            <a href="drama.html">Drama</a>
+            <a href="crime.html">Crime</a>
+            <a href="aventura.html" class="ativo">Aventura</a>
+             <a href="lgbt.html" class="ativo">LGBTQIA+</a>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+
+    <section class="hero">
+        <div class="hero-content">
+
+            <div class="categoria">GÊNERO CINEMATOGRÁFICO</div>
+
+            <h1>Aventura</h1>
+
+            <p>
+                Grandes jornadas, lugares extraordinários, desafios e descobertas
+                que levam personagens e espectadores a mundos repletos de emoção.
+            </p>
+
+            <a href="#historia" class="botao">Explorar gênero</a>
+
+        </div>
+    </section>
+
+    <!-- HISTÓRIA -->
+
+    <section class="historia" id="historia">
+
+        <h2 class="titulo-secao">História da Aventura</h2>
+
+        <p class="subtitulo">
+            O cinema de aventura acompanha personagens em grandes jornadas,
+            explorando territórios desconhecidos, enfrentando perigos e buscando
+            tesouros, respostas ou novas descobertas.
+        </p>
+
+        <div class="historia-grid">
+
+            <img src="https://www.oficinadanet.com.br/media/post/71113/1200/filmes-aventura-netflix.jpg"
+                 alt="Cena relacionada ao gênero aventura">
+
+            <div class="historia-texto">
+
+                <p>
+                    O gênero de aventura possui raízes em histórias de exploração,
+                    viagens e descobertas. Desde os primeiros anos do cinema,
+                    essas narrativas levaram o público para lugares distantes
+                    e situações extraordinárias.
+                </p>
+
+                <p>
+                    Ao longo do século XX, filmes de aventura passaram a incorporar
+                    elementos de ação, fantasia, ficção científica e comédia,
+                    tornando suas histórias cada vez maiores e mais diversificadas.
+                </p>
+
+                <p>
+                    Atualmente, o gênero continua popular por proporcionar
+                    experiências cinematográficas repletas de descobertas,
+                    personagens marcantes e grandes desafios.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CARACTERÍSTICAS -->
+
+    <section>
+
+        <h2 class="titulo-secao">Características</h2>
+
+        <p class="subtitulo">
+            Elementos que ajudam a definir as histórias de aventura no cinema.
+        </p>
+
+        <div class="grid-4">
+
+            <div class="info-card">
+                <div class="numero">01</div>
+                <h3>Exploração</h3>
+                <p>
+                    Personagens viajam para lugares desconhecidos em busca
+                    de respostas, tesouros ou novas experiências.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="numero">02</div>
+                <h3>Desafios</h3>
+                <p>
+                    Obstáculos e perigos fazem parte da jornada e testam
+                    as habilidades dos protagonistas.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="numero">03</div>
+                <h3>Descobertas</h3>
+                <p>
+                    Novos lugares, culturas, objetos e segredos são revelados
+                    ao longo da história.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="numero">04</div>
+                <h3>Jornada</h3>
+                <p>
+                    A narrativa geralmente acompanha uma grande viagem
+                    com diferentes acontecimentos pelo caminho.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- LINHA DO TEMPO -->
+
+    <section class="timeline">
+
+        <h2 class="titulo-secao">Evolução do Gênero</h2>
+
+        <p class="subtitulo">
+            Alguns períodos importantes para o desenvolvimento do cinema
+            de aventura.
+        </p>
+
+        <div class="linha">
+
+            <div class="timeline-item">
+                <h3>1920–1930</h3>
+                <p>
+                    Histórias de exploração e viagens começam a conquistar
+                    espaço nas produções cinematográficas.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1940–1960</h3>
+                <p>
+                    Grandes aventuras passam a apresentar cenários exóticos,
+                    heróis e histórias de exploração.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>1970–1990</h3>
+                <p>
+                    O gênero ganha grandes produções e começa a se misturar
+                    fortemente com ação e fantasia.
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>2000–Hoje</h3>
+                <p>
+                    Novas tecnologias permitem criar mundos grandiosos,
+                    criaturas fantásticas e jornadas ainda mais imersivas.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FILMES CLÁSSICOS -->
+
+    <section class="filmes">
+
+        <h2 class="titulo-secao">Filmes Clássicos</h2>
+
+        <p class="subtitulo">
+            Grandes aventuras que se tornaram referências para o gênero.
+        </p>
+
+        <div class="cards-filmes">
+
+            <div class="filme-card">
+
+                <img src="https://www.notebookcheck.info/fileadmin/Notebooks/News/_nc4/Indiana-Jones-and-the-Great-Circle-review-header.jpg"
+                     alt="Indiana Jones">
+
+                <div class="filme-info">
+
+                    <h3>Indiana Jones</h3>
+
+                    <p>
+                        Um arqueólogo embarca em aventuras perigosas em busca
+                        de artefatos históricos.
+                    </p>
+
+                    <div class="nota">★ 8,4</div>
+
+                </div>
+
+            </div>
+
+            <div class="filme-card">
+
+                <img src="https://m.media-amazon.com/images/S/pv-target-images/0bb6daecbbb05130ba4caa37c9ed17cd3dbdace1123ea456ab3dc715afca2ef7.jpg"
+                     alt="Jurassic Park">
+
+                <div class="filme-info">
+
+                    <h3>Jurassic Park</h3>
+
+                    <p>
+                        Uma visita a um parque com dinossauros recriados
+                        transforma-se em uma grande luta pela sobrevivência.
+                    </p>
+
+                    <div class="nota">★ 8,2</div>
+
+                </div>
+
+            </div>
+
+            <div class="filme-card">
+
+                <img src="https://br.web.img2.acsta.net/medias/nmedia/18/92/34/89/20194741.jpg"
+                     alt="O Senhor dos Anéis">
+
+                <div class="filme-info">
+
+                    <h3>O Senhor dos Anéis</h3>
+
+                    <p>
+                        Uma grande jornada atravessa terras fantásticas
+                        para impedir que um poderoso artefato seja usado.
+                    </p>
+
+                    <div class="nota">★ 9,0</div>
+
+                </div>
+
+            </div>
+
+            <div class="filme-card">
+
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSn5jlFECykz2PaZPkt3HR2UZLmALZR6YngVh5Umv2yWw&s=10"
+                     alt="Piratas do Caribe">
+
+                <div class="filme-info">
+
+                    <h3>Piratas do Caribe</h3>
+
+                    <p>
+                        Piratas enfrentam perigos, maldições e inimigos
+                        em aventuras pelos mares.
+                    </p>
+
+                    <div class="nota">★ 8,1</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FILMES MODERNOS -->
+
+    <section class="filmes">
+
+        <h2 class="titulo-secao">Filmes Modernos</h2>
+
+        <p class="subtitulo">
+            Produções recentes que continuam renovando o gênero.
+        </p>
+
+        <div class="cards-filmes">
+
+            <div class="filme-card">
+
+                <img src="https://m.media-amazon.com/images/I/81zN7udGRUL.jpg"
+                     alt="Duna">
+
+                <div class="filme-info">
+
+                    <h3>Duna</h3>
+
+                    <p>
+                        Uma jornada épica em um planeta desértico envolve
+                        poder, política e sobrevivência.
+                    </p>
+
+                    <div class="nota">★ 8,0</div>
+
+                </div>
+
+            </div>
+
+            <div class="filme-card">
+
+                <img src="https://m.media-amazon.com/images/M/MV5BNWI0Y2NkOWEtMmM2OC00MjQ3LWI1YzItZGQxYzQ3NzI4NWZmXkEyXkFqcGc@._V1_.jpg"
+                     alt="Avatar">
+
+                <div class="filme-info">
+
+                    <h3>Avatar</h3>
+
+                    <p>
+                        Um novo mundo e seus habitantes são apresentados
+                        em uma aventura de grandes proporções.
+                    </p>
+
+                    <div class="nota">★ 7,8</div>
+
+                </div>
+
+            </div>
+
+            <div class="filme-card">
+
+                <img src="https://m.media-amazon.com/images/S/pv-target-images/abec985ed0ded30291517b47d0e837658a8ef180e8b2720be52e8d1137f580ed._UR2000,3000_SX750_FMjpg_.jpg"
+                     alt="Uma aventura moderna">
+
+                <div class="filme-info">
+
+                    <h3>Jumanji</h3>
+
+                    <p>
+                        Um grupo de jovens entra em um mundo perigoso
+                        onde precisa superar diferentes desafios.
+                    </p>
+
+                    <div class="nota">★ 6,9</div>
+
+                </div>
+
+            </div>
+
+            <div class="filme-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/pt/4/43/Jungle_Cruise_Poster.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original"
+                     alt="Jungle Cruise">
+
+                <div class="filme-info">
+
+                    <h3>Jungle Cruise</h3>
+
+                    <p>
+                        Uma expedição por uma floresta misteriosa dá início
+                        a uma aventura cheia de perigos e descobertas.
+                    </p>
+
+                    <div class="nota">★ 6,6</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- DIRETORES -->
+
+    <section class="diretores">
+
+        <h2 class="titulo-secao">Diretores Importantes</h2>
+
+        <p class="subtitulo">
+            Cineastas que ajudaram a criar grandes mundos e jornadas
+            no cinema de aventura.
+        </p>
+
+        <div class="grid-4">
+
+            <div class="diretor-card">
+
+                <img src="https://images.mubicdn.net/images/cast_member/16878/cache-242-1602511014/image-w856.jpg"
+                     alt="Steven Spielberg">
+
+                <h3>Steven Spielberg</h3>
+
+                <p>
+                    Conhecido por grandes aventuras e histórias de exploração.
+                </p>
+
+            </div>
+
+            <div class="diretor-card">
+
+                <img src="https://static.wikia.nocookie.net/terramedia/images/a/a1/Jackson.webp/revision/latest?cb=20260213184942"
+                     alt="Peter Jackson">
+
+                <h3>Peter Jackson</h3>
+
+                <p>
+                    Diretor da trilogia O Senhor dos Anéis.
+                </p>
+
+            </div>
+
+            <div class="diretor-card">
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/James_Cameron_at_53rd_Saturn_Awards_2026-01.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original"
+                     alt="James Cameron">
+
+                <h3>James Cameron</h3>
+
+                <p>
+                    Conhecido por grandes produções e mundos visualmente
+                    impressionantes.
+                </p>
+
+            </div>
+
+            <div class="diretor-card">
+
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Jon_Favreau_2016.jpeg/960px-Jon_Favreau_2016.jpeg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail"
+                     alt="Jon Favreau">
+
+                <h3>Jon Favreau</h3>
+
+                <p>
+                    Diretor de produções modernas de aventura e fantasia.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- TRAILER -->
+
+    <section class="trailer">
+
+        <h2 class="titulo-secao">Trailer em Destaque</h2>
+
+        <p class="subtitulo" style="margin-left:auto;margin-right:auto;">
+            Confira uma aventura que conquistou o público e se tornou
+            referência no gênero.
+        </p>
+
+        <iframe
+            src="https://www.youtube.com/embed/P5ieIbInFpg"
+            title="Trailer de aventura"
+            allowfullscreen>
+        </iframe>
+
+    </section>
+
+    <!-- CURIOSIDADES -->
+
+    <section class="curiosidades">
+
+        <h2 class="titulo-secao">Curiosidades</h2>
+
+        <p class="subtitulo">
+            Alguns elementos interessantes presentes nos filmes de aventura.
+        </p>
+
+        <div class="grid-4">
+
+            <div class="info-card">
+                <div class="numero">01</div>
+                <h3>Exploradores</h3>
+                <p>
+                    Muitos protagonistas são arqueólogos, exploradores,
+                    pesquisadores ou aventureiros.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="numero">02</div>
+                <h3>Tesouros</h3>
+                <p>
+                    Artefatos e tesouros são elementos frequentes em
+                    histórias clássicas de aventura.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="numero">03</div>
+                <h3>Mundos Fantásticos</h3>
+                <p>
+                    Algumas aventuras apresentam mundos completamente
+                    imaginários e criaturas extraordinárias.
+                </p>
+            </div>
+
+            <div class="info-card">
+                <div class="numero">04</div>
+                <h3>Grandes Jornadas</h3>
+                <p>
+                    A viagem do protagonista geralmente é tão importante
+                    quanto o objetivo final da história.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FAQ -->
+
+    <section class="faq">
+
+        <h2 class="titulo-secao">Perguntas Frequentes</h2>
+
+        <div class="faq-item">
+
+            <h3>O que caracteriza um filme de aventura?</h3>
+
+            <p>
+                Viagens, exploração, descobertas, desafios e grandes jornadas
+                são elementos comuns ao gênero.
+            </p>
+
+        </div>
+
+        <div class="faq-item">
+
+            <h3>Aventura e ação são a mesma coisa?</h3>
+
+            <p>
+                Não. Os dois gêneros podem se misturar, mas aventura costuma
+                dar mais destaque à jornada, exploração e descobertas.
+            </p>
+
+        </div>
+
+        <div class="faq-item">
+
+            <h3>Filmes de fantasia podem ser considerados aventura?</h3>
+
+            <p>
+                Sim. Muitas histórias de fantasia utilizam elementos de
+                aventura para acompanhar grandes jornadas e descobertas.
+            </p>
+
+        </div>
+
+        <div class="faq-item">
+
+            <h3>Por que o gênero continua popular?</h3>
+
+            <p>
+                Porque permite apresentar mundos diferentes, personagens
+                marcantes e histórias capazes de proporcionar uma experiência
+                de descoberta ao público.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-grid">
+
+            <div>
+
+                <h3>CineMundo</h3>
+
+                <p>
+                    Um portal dedicado ao universo do cinema, seus gêneros,
+                    filmes, diretores e histórias.
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>Gêneros</h3>
+
+                <p><a href="acao.html">Ação</a></p>
+                <p><a href="romance.html">Romance</a></p>
+                <p><a href="terror.html">Terror</a></p>
+                <p><a href="aventura.html">Aventura</a></p>
+
+            </div>
+
+            <div>
+
+                <h3>Explore</h3>
+
+                <p><a href="../index.html">Início</a></p>
+                <p><a href="suspense.html">Suspense</a></p>
+                <p><a href="drama.html">Drama</a></p>
+                <p><a href="crime.html">Crime</a></p>
+
+            </div>
+
+            <div>
+
+                <h3>Contato</h3>
+
+                <p><a href="#">Instagram</a></p>
+                <p><a href="#">E-mail</a></p>
+                <p><a href="#">Sobre o projeto</a></p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
+```
